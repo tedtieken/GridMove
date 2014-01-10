@@ -218,6 +218,10 @@ DropZoneMode:
 
         If not canceled
         {
+          GridLeft := Floor(GridLeft)
+          GridTop := Floor(GridTop)
+          GridWidth := Floor(GridWidth)
+          GridHeight := Floor(GridHeight)
           Gui, 2: +ToolWindow +AlwaysOnTop -Disabled -SysMenu -Caption
           Gui, 2:show, x%GridLeft% y%GridTop% w%GridWidth% h%GridHeight% NoActivate
         }
@@ -1971,11 +1975,11 @@ OSDWrite(Value)
   Global Monitor1Height
   Global Monitor1Top
   Global Monitor1Left
-  XPos := Monitor1Left + Monitor1Width / 2 - 50
-  YPos := Monitor1Top + Monitor1Height / 2 - 15
+  XPos := Floor(Monitor1Left + Monitor1Width / 2 - 50)
+  YPos := Floor(Monitor1Top + Monitor1Height / 2 - 15)
   GuiControl, 4:Text, OSD, %value%
   Gui,4: +ToolWindow +AlwaysOnTop -Disabled -SysMenu -Caption
-  ;Gui,4:Show, x%Xpos% y%Ypos% w100 h30 noactivate
+  Gui,4:Show, x%Xpos% y%Ypos% w100 h30 noactivate
   return
   }
 
