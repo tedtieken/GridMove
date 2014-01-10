@@ -1,3 +1,0 @@
-#notrayicon
-WinMinimize,A
-return
