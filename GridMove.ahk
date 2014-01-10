@@ -1337,7 +1337,7 @@ ComputeEdgeRectangles()
 
 ShouldUseSizeMoveMessage(class)
 {
-	return class = "Putty" or class = "Pietty"
+   return class = "Putty" or class = "Pietty"
 }
 
 StartWithWindowsDetect:
@@ -1831,7 +1831,7 @@ Command:
 Drop_Command:
   Settimer,Drop_Command,off
   OSDwrite("- -")
-  Input,FirstNumber,I L1 T10,{esc},1,2,3,4,5,6,7,8,9,0,m,r,n,M,v,a,e
+  Input,FirstNumber,L1 T10,{esc},1,2,3,4,5,6,7,8,9,0,m,r,n,M,v,a,e
   If ErrorLevel = Max
     {
     OSDwrite("| |")
@@ -1905,7 +1905,7 @@ Drop_Command:
   Command2:
   output := FirstNumber . " -"
   OSDwrite(Output)
-  Input,SecondNumber,I L1 T2,{esc}{enter},1,2,3,4,5,6,7,8,9,0
+  Input,SecondNumber,L1 T2,{esc}{enter},1,2,3,4,5,6,7,8,9,0
   If ErrorLevel = Max
     {
     OSDwrite("")
@@ -1975,7 +1975,7 @@ OSDWrite(Value)
   YPos := Monitor1Top + Monitor1Height / 2 - 15
   GuiControl, 4:Text, OSD, %value%
   Gui,4: +ToolWindow +AlwaysOnTop -Disabled -SysMenu -Caption
-  Gui,4:Show, x%Xpos% y%Ypos% w100 h30 noactivate
+  ;Gui,4:Show, x%Xpos% y%Ypos% w100 h30 noactivate
   return
   }
 
@@ -2150,7 +2150,7 @@ WinHotkeysMeta:
 
   Settimer,Drop_Command,off
   OSDwrite("- -")
-  Input,FirstNumber,I L1 T10,{esc},1,2,3,4,5,6,7,8,9,0,m,r,n,M,v,a,e
+  Input,FirstNumber,L1 T10,{esc},1,2,3,4,5,6,7,8,9,0,m,r,n,M,v,a,e
   If ErrorLevel = Max
     {
     OSDwrite("| |")
