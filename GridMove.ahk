@@ -28,7 +28,8 @@
   DebugMode := False
   StartWithWindows := False
   DisableTitleButtonsDetection := False
-
+  MOVETOHERE = 0
+  
 
   ScriptVersion = 1.19.62
 
@@ -47,6 +48,7 @@
   ComputeEdgeRectangles()
   OSDcreate()
   GoSub, ReadIni
+  GoSub, ResetMoveTo
   SetWinDelay, 0
   SetBatchLines, -1
 
@@ -1579,6 +1581,24 @@ ReadIni:
   }
 return
 
+ReadMoveTo:
+  MvScriptDir=%A_AppData%/DonationCoder/GridMove/move.to
+
+  IfExist,%MvScriptDir% 
+  {
+    IniRead,MOVETOHERE,%MvScriptDir%,MoveToHere,MoveToHere,0    
+  }
+return
+  
+ResetMoveTo:
+  MvScriptDir=%A_AppData%/DonationCoder/GridMove/move.to
+  IfExist,%MvScriptDir% 
+  {
+    IniWrite,0,%MvScriptDir%,MoveToHere,MoveToHere
+  }
+  MOVETOHERE=0
+return
+
 WriteIni:
   IfNotExist,%ScriptDir%
   {
@@ -1829,11 +1849,20 @@ ReloadOnResolutionChange:
 
 
 Command:
-
+  GoSub, ReadMoveTo
+  if MOVETOHERE <> 0 
+  {
+    MoveToGrid(MOVETOHERE)
+    GoSub, ResetMoveTo
+    return
+  }
   GoSub, ShowGroups
 
 Drop_Command:
   Settimer,Drop_Command,off
+  
+
+  
   OSDwrite("- -")
   Input,FirstNumber,L1 T10,{esc},1,2,3,4,5,6,7,8,9,0,m,r,n,M,v,a,e
   If ErrorLevel = Max

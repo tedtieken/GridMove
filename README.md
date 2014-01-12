@@ -19,15 +19,25 @@ To use this fork:
 Controlling Gridmove with another AHK script:
 ========
 * Enable HotKeys > Use Command
-* Send your input with a small sleep, shown here as 500 miliseconds
+* Add a MoveWinToGrid command to set the move.to file
 
 ```
-^2::
+MoveWinToGrid(GridNum) {
+  IfNotExist,%A_AppData%/DonationCoder/ 
+  {
+    FileCreateDir,%A_AppData%/DonationCoder/
+  }
+  IfNotExist,%A_AppData%/DonationCoder/GridMove
+  {
+    FileCreateDir,%A_AppData%/DonationCoder/GridMove
+  }  
+  ScriptDir = %A_AppData%/DonationCoder/GridMove/move.to
+  FileAppend, ,%ScriptDir%
+  IniWrite,%GridNum%         ,%ScriptDir%,MoveToHere,MoveToHere  
+  sleep 200
   Send #g
-  sleep 500
-  Send, 3
-  sleep 500
-  Send, 5
+  sleep 200
+}
 
 ```
 
